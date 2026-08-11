@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservo | Moda Masculina e Contemporânea</title>
+    <!-- Tailwind CSS para um design moderno e responsivo -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-white text-neutral-900 font-sans antialiased">
+
+    <!-- Topo / Aviso -->
+    <div class="bg-neutral-900 text-white text-xs text-center py-2 px-4 tracking-wider">
+        FRETE GRÁTIS NAS COMPRAS ACIMA DE R$ 299,00 | GANHE 10% OFF NO PIX
+    </div>
+
+    <!-- Cabeçalho / Navbar -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-neutral-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Esquerda: Menu Mobile + Logo -->
+            <div class="flex items-center space-x-4 sm:space-x-8">
+                <button onclick="voltarParaHome()" class="md:hidden text-neutral-800 text-xl focus:outline-none">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <a href="#" onclick="voltarParaHome(); return false;" class="text-xl sm:text-2xl font-black tracking-widest text-neutral-900">RESERVO</a>
+            </div>
+
+            <!-- Centro: Links de Navegação (Apenas Desktop) -->
+            <nav class="hidden md:flex space-x-8 text-sm font-medium tracking-wide">
+                <a href="#" onclick="voltarParaHome(); return false;" class="hover:text-neutral-500 transition">LANÇAMENTOS</a>
+                <a href="#" onclick="voltarParaHome(); return false;" class="hover:text-neutral-500 transition">ROUPAS</a>
+                <a href="#" onclick="voltarParaHome(); return false;" class="hover:text-neutral-500 transition">CALÇADOS</a>
+                <a href="#" onclick="voltarParaHome(); return false;" class="hover:text-neutral-500 transition">ACESSÓRIOS</a>
+            </nav>
+
+            <!-- Direita: Ícones -->
+            <div class="flex items-center space-x-5 text-lg">
+                <a href="#" class="hover:text-neutral-500 transition hidden sm:block"><i class="fa-solid fa-magnifying-glass"></i></a>
+                <a href="#" class="hover:text-neutral-500 transition"><i class="fa-regular fa-user"></i></a>
+                
+                <!-- Botão para abrir o Carrinho -->
+                <button onclick="abrirCarrinho()" class="hover:text-neutral-500 transition relative focus:outline-none flex items-center gap-1.5 cursor-pointer">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span id="contador-carrinho" class="absolute -top-2 -right-2 bg-neutral-900 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== TELA INICIAL (HOME) ==================== -->
+    <div id="view-home">
+        <!-- Hero Section (Banner Principal) -->
+        <section class="relative bg-neutral-100 h-[70vh] min-h-[500px] flex items-center justify-center text-center px-4">
+            <div class="absolute inset-0 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=1920" alt="Coleção Reservo" class="w-full h-full object-cover opacity-80">
+                <div class="absolute inset-0 bg-black/30"></div>
+            </div>
+            <div class="relative z-10 max-w-2xl text-white">
+                <span class="text-xs uppercase tracking-widest bg-white/20 backdrop-blur px-3 py-1 rounded-full mb-4 inline-block font-semibold">Nova Coleção Outono/Inverno</span>
+                <h1 class="text-4xl sm:text-6xl font-bold tracking-tight mb-6">ESTILO E ATITUDE EM CADA DETALHE</h1>
+                <p class="text-sm sm:text-base text-neutral-200 mb-8">Descubra peças versáteis feitas para acompanhar o seu ritmo na cidade.</p>
+                <a href="#produtos" class="bg-white text-neutral-900 px-8 py-4 text-xs font-bold tracking-widest uppercase hover:bg-neutral-900 hover:text-white transition duration-300">COMPRAR AGORA</a>
+            </div>
+        </section>
+
+        <!-- Vitrine de Produtos -->
+        <main id="produtos" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="text-center mb-12">
+                <h2 class="text-2xl sm:text-3xl font-bold tracking-tight mb-2">MAIS VENDIDOS</h2>
+                <p class="text-neutral-500 text-sm">Clique em qualquer produto abaixo para escolher o tamanho e comprar.</p>
+            </div>
+
+            <!-- Grade de Produtos -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Produto 1 -->
+                <div class="group cursor-pointer" onclick="abrirProduto(1)">
+                    <div class="relative bg-neutral-100 aspect-[3/4] overflow-hidden mb-4">
+                        <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=600" alt="Camiseta Pima Classic" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <span class="absolute top-3 left-3 bg-neutral-900 text-white text-[10px] px-2 py-1 uppercase tracking-wider font-bold">Novo</span>
+                    </div>
+                    <h3 class="text-sm font-medium text-neutral-900 mb-1">Camiseta Pima Classic</h3>
+                    <p class="text-xs text-neutral-500 mb-2">Algodão Egípcio Premium</p>
+                    <p class="text-sm font-bold text-neutral-900">R$ 179,00</p>
+                </div>
+
+                <!-- Produto 2 -->
+                <div class="group cursor-pointer" onclick="abrirProduto(2)">
+                    <div class="relative bg-neutral-100 aspect-[3/4] overflow-hidden mb-4">
+                        <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&q=80&w=600" alt="Camisa Oxford Slim" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <h3 class="text-sm font-medium text-neutral-900 mb-1">Camisa Oxford Slim</h3>
+                    <p class="text-xs text-neutral-500 mb-2">100% Algodão</p>
+                    <p class="text-sm font-bold text-neutral-900">R$ 299,00</p>
+                </div>
+
+                <!-- Produto 3 -->
+                <div class="group cursor-pointer" onclick="abrirProduto(3)">
+                    <div class="relative bg-neutral-100 aspect-[3/4] overflow-hidden mb-4">
+                        <img src="https://images.unsplash.com/photo-1555529771-835f59fc5efe?auto=format&fit=crop&q=80&w=600" alt="Calça Chino Flex" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <span class="absolute top-3 left-3 bg-red-600 text-white text-[10px] px-2 py-1 uppercase tracking-wider font-bold">-15%</span>
+                    </div>
+                    <h3 class="text-sm font-medium text-neutral-900 mb-1">Calça Chino Flex</h3>
+                    <p class="text-xs text-neutral-500 mb-2">Sarja com Elastano</p>
+                    <p class="text-sm font-bold text-neutral-900"><span class="line-through text-neutral-400 font-normal mr-2">R$ 399,00</span>R$ 339,00</p>
+                </div>
+
+                <!-- Produto 4 -->
+                <div class="group cursor-pointer" onclick="abrirProduto(4)">
+                    <div class="relative bg-neutral-100 aspect-[3/4] overflow-hidden mb-4">
+                        <img src="https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&q=80&w=600" alt="Jaqueta Trucker Denim" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <h3 class="text-sm font-medium text-neutral-900 mb-1">Jaqueta Trucker Denim</h3>
+                    <p class="text-xs text-neutral-500 mb-2">Lavagem Média</p>
+                    <p class="text-sm font-bold text-neutral-900">R$ 499,00</p>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- ==================== TELA DE DETALHES DO PRODUTO ==================== -->
+    <div id="view-produto" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <button onclick="voltarParaHome()" class="text-xs font-bold uppercase tracking-wider text-neutral-500 hover:text-neutral-900 mb-8 flex items-center gap-2 cursor-pointer">
+            <i class="fa-solid fa-arrow-left"></i> Voltar para a loja
+        </button>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div class="bg-neutral-100 aspect-[3/4] overflow-hidden">
+                <img id="detalhe-img" src="" alt="Produto" class="w-full h-full object-cover">
+            </div>
+
+            <div class="flex flex-col justify-center">
+                <span id="detalhe-tag" class="bg-neutral-900 text-white text-[10px] px-2.5 py-1 uppercase tracking-wider font-bold w-fit mb-3">Destaque</span>
+                <h1 id="detalhe-nome" class="text-3xl font-bold tracking-tight mb-2">Nome do Produto</h1>
+                <p id="detalhe-sub" class="text-xs text-neutral-500 mb-4">Categoria</p>
+                <p id="detalhe-preco" class="text-2xl font-black text-neutral-900 mb-6">R$ 0,00</p>
+
+                <p class="text-sm text-neutral-600 mb-6 leading-relaxed">
+                    Produzido com alto padrão de qualidade, este item oferece caimento impecável, durabilidade superior e toque macio na pele, ideal para qualquer ocasião.
+                </p>
+
+                <!-- Seleção de Tamanho -->
+                <div class="mb-8">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-neutral-700 mb-3">Escolha o Tamanho:</label>
+                    <div class="flex space-x-3">
+                        <button onclick="selecionarTamanho('P')" class="tamanho-btn border border-neutral-300 w-12 h-12 flex items-center justify-center text-sm font-bold hover:border-neutral-900 transition cursor-pointer">P</button>
+                        <button onclick="selecionarTamanho('M')" class="tamanho-btn border border-neutral-900 bg-neutral-900 text-white w-12 h-12 flex items-center justify-center text-sm font-bold transition cursor-pointer">M</button>
+                        <button onclick="selecionarTamanho('G')" class="tamanho-btn border border-neutral-300 w-12 h-12 flex items-center justify-center text-sm font-bold hover:border-neutral-900 transition cursor-pointer">G</button>
+                        <button onclick="selecionarTamanho('GG')" class="tamanho-btn border border-neutral-300 w-12 h-12 flex items-center justify-center text-sm font-bold hover:border-neutral-900 transition cursor-pointer">GG</button>
+                    </div>
+                </div>
+
+                <!-- Botão Comprar -->
+                <button onclick="adicionarAoCarrinho()" class="bg-neutral-900 text-white w-full py-4 text-xs font-bold tracking-widest uppercase hover:bg-neutral-800 transition duration-300 flex items-center justify-center gap-3 cursor-pointer">
+                    <i class="fa-solid fa-bag-shopping"></i> ADICIONAR À SACOLA / COMPRAR
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== GAVETA DO CARRINHO (SIDEBAR) ==================== -->
+    <div id="carrinho-overlay" class="fixed inset-0 bg-black/50 z-50 hidden transition-opacity" onclick="fecharCarrinho()"></div>
+    <div id="carrinho-drawer" class="fixed top-0 right-0 h-full w-full max-w-md bg-white z-50 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col">
+        <div class="p-6 border-b border-neutral-200 flex items-center justify-between">
+            <h2 class="text-sm font-bold uppercase tracking-wider">Sua Sacola (<span id="drawer-qtd">0</span>)</h2>
+            <button onclick="fecharCarrinho()" class="text-lg text-neutral-500 hover:text-neutral-900 cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <div id="carrinho-itens" class="flex-1 overflow-y-auto p-6 space-y-4">
+            <p class="text-neutral-400 text-xs text-center py-10">Sua sacola está vazia.</p>
+        </div>
+
+        <div class="p-6 border-t border-neutral-200 bg-neutral-50">
+            <div class="flex justify-between mb-4 text-sm font-bold">
+                <span>Subtotal:</span>
+                <span id="carrinho-subtotal">R$ 0,00</span>
+            </div>
+            <a href="{% url 'carrinho' %}">
+            <button onclick="finalizarCompra()" class="bg-neutral-900 text-white w-full py-4 text-xs font-bold tracking-widest uppercase hover:bg-neutral-800 transition duration-300 cursor-pointer">
+                FINALIZAR COMPRA
+            </button></a>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer class="bg-neutral-900 text-white pt-16 pb-12 mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+            <div>
+                <h3 class="text-lg font-black tracking-widest mb-4">RESERVO</h3>
+                <p class="text-xs text-neutral-400 leading-relaxed">Moda masculina autêntica, unindo conforto, design e alta qualidade para o seu dia a dia.</p>
+            </div>
+            <div>
+                <h4 class="text-xs font-bold uppercase tracking-wider mb-4">Institucional</h4>
+                <ul class="space-y-2 text-xs text-neutral-400">
+                    <li><a href="#" class="hover:text-white transition">Quem Somos</a></li>
+                    <li><a href="#" class="hover:text-white transition">Sustentabilidade</a></li>
+                    <li><a href="#" class="hover:text-white transition">Trabalhe Conosco</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-xs font-bold uppercase tracking-wider mb-4">Atendimento</h4>
+                <ul class="space-y-2 text-xs text-neutral-400">
+                    <li><a href="#" class="hover:text-white transition">Fale Conosco</a></li>
+                    <li><a href="#" class="hover:text-white transition">Trocas e Devoluções</a></li>
+                    <li><a href="#" class="hover:text-white transition">Política de Entrega</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-xs font-bold uppercase tracking-wider mb-4">Newsletter</h4>
+                <p class="text-xs text-neutral-400 mb-4">Receba novidades e ofertas exclusivas no seu e-mail.</p>
+                <form class="flex" onsubmit="event.preventDefault(); alert('E-mail cadastrado com sucesso!');">
+                    <input type="email" placeholder="Seu e-mail" class="bg-neutral-800 text-xs px-4 py-3 text-white focus:outline-none w-full" required>
+                    <button type="submit" class="bg-white text-neutral-900 px-4 text-xs font-bold uppercase hover:bg-neutral-200 transition cursor-pointer">OK</button>
+                </form>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-neutral-800 pt-6 text-center text-xs text-neutral-500">
+            &copy; 2026 RESERVO. Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <!-- Scripts de Interatividade -->
+    <script>
+        const produtosDB = {
+            1: { nome: "Camiseta Pima Classic", sub: "Algodão Egípcio Premium", preco: 179.00, precoStr: "R$ 179,00", img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=600" },
+            2: { nome: "Camisa Oxford Slim", sub: "100% Algodão", preco: 299.00, precoStr: "R$ 299,00", img: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&q=80&w=600" },
+            3: { nome: "Calça Chino Flex", sub: "Sarja com Elastano", preco: 339.00, precoStr: "R$ 339,00", img: "https://images.unsplash.com/photo-1555529771-835f59fc5efe?auto=format&fit=crop&q=80&w=600" },
+            4: { nome: "Jaqueta Trucker Denim", sub: "Lavagem Média", preco: 499.00, precoStr: "R$ 499,00", img: "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&q=80&w=600" }
+        };
+
+        let produtoAtualID = null;
+        let tamanhoSelecionado = 'M';
+        let carrinho = [];
+
+        function abrirProduto(id) {
+            produtoAtualID = id;
+            const p = produtosDB[id];
+            
+            document.getElementById('detalhe-img').src = p.img;
+            document.getElementById('detalhe-nome').innerText = p.nome;
+            document.getElementById('detalhe-sub').innerText = p.sub;
+            document.getElementById('detalhe-preco').innerText = p.precoStr;
+
+            document.getElementById('view-home').classList.add('hidden');
+            document.getElementById('view-produto').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            selecionarTamanho('M');
+        }
+
+        function voltarParaHome() {
+            document.getElementById('view-produto').classList.add('hidden');
+            document.getElementById('view-home').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function selecionarTamanho(tam) {
+            tamanhoSelecionado = tam;
+            document.querySelectorAll('.tamanho-btn').forEach(btn => {
+                if(btn.innerText === tam) {
+                    btn.classList.add('border-neutral-900', 'bg-neutral-900', 'text-white');
+                    btn.classList.remove('border-neutral-300');
+                } else {
+                    btn.classList.remove('border-neutral-900', 'bg-neutral-900', 'text-white');
+                    btn.classList.add('border-neutral-300');
+                }
+            });
+        }
+
+        function adicionarAoCarrinho() {
+            const produto = produtosDB[produtoAtualID];
+            carrinho.push({ ...produto, tamanho: tamanhoSelecionado });
+            atualizarCarrinhoUI();
+            abrirCarrinho();
+        }
+
+        function removerDoCarrinho(index) {
+            carrinho.splice(index, 1);
+            atualizarCarrinhoUI();
+        }
+
+        function atualizarCarrinhoUI() {
+            document.getElementById('contador-carrinho').innerText = carrinho.length;
+            document.getElementById('drawer-qtd').innerText = carrinho.length;
+
+            const container = document.getElementById('carrinho-itens');
+            const subtotalEl = document.getElementById('carrinho-subtotal');
+
+            if(carrinho.length === 0) {
+                container.innerHTML = `<p class="text-neutral-400 text-xs text-center py-10">Sua sacola está vazia.</p>`;
+                subtotalEl.innerText = "R$ 0,00";
+                return;
+            }
+
+            let html = '';
+            let subtotal = 0;
+
+            carrinho.forEach((item, index) => {
+                subtotal += item.preco;
+                html += `
+                    <div class="flex items-center gap-4 pb-4 border-b border-neutral-100">
+                        <img src="${item.img}" class="w-16 h-20 object-cover bg-neutral-100">
+                        <div class="flex-1">
+                            <h4 class="text-xs font-bold">${item.nome}</h4>
+                            <p class="text-[10px] text-neutral-500">Tamanho: ${item.tamanho}</p>
+                            <p class="text-xs font-bold mt-1">R$ ${item.preco.toFixed(2).replace('.', ',')}</p>
+                        </div>
+                        <button onclick="removerDoCarrinho(${index})" class="text-neutral-400 hover:text-red-600 text-sm cursor-pointer"><i class="fa-solid fa-trash-can"></i></button>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+            subtotalEl.innerText = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+        }
+
+        function abrirCarrinho() {
+            document.getElementById('carrinho-overlay').classList.remove('hidden');
+            document.getElementById('carrinho-drawer').classList.remove('translate-x-full');
+        }
+
+        function fecharCarrinho() {
+            document.getElementById('carrinho-overlay').classList.add('hidden');
+            document.getElementById('carrinho-drawer').classList.add('translate-x-full');
+        }
+
+        function finalizarCompra() {
+            if(carrinho.length === 0) {
+                alert('Sua sacola está vazia!');
+                return;
+            }
+            alert('Parabéns! Pedido simulado finalizado com sucesso.');
+            carrinho = [];
+            atualizarCarrinhoUI();
+            fecharCarrinho();
+            voltarParaHome();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sua Sacola | Reservo</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-white text-neutral-900 font-sans antialiased">
+
+    <!-- Topo / Aviso -->
+    <div class="bg-neutral-900 text-white text-xs text-center py-2 px-4 tracking-wider">
+        FRETE GRÁTIS NAS COMPRAS ACIMA DE R$ 299,00 | GANHE 10% OFF NO PIX
+    </div>
+
+    <!-- Cabeçalho / Navbar -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-neutral-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-4 sm:space-x-8">
+                <a href="{% url 'home' %}" class="text-xl sm:text-2xl font-black tracking-widest text-neutral-900">RESERVO</a>
+            </div>
+            <div class="flex items-center space-x-5 text-lg">
+                <a href="{% url 'home' %}" class="text-xs font-bold uppercase tracking-wider text-neutral-600 hover:text-neutral-900">Continuar Comprando</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Conteúdo do Carrinho -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <h1 class="text-2xl sm:text-3xl font-bold tracking-tight mb-8">Sua Sacola de Compras</h1>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            <!-- Lista de Produtos -->
+            <div class="lg:col-span-2 space-y-6" id="lista-carrinho-pagina">
+                <!-- Preenchido via JavaScript (LocalStorage) -->
+            </div>
+
+            <!-- Resumo do Pedido -->
+            <div class="bg-neutral-50 p-6 border border-neutral-200 h-fit">
+                <h2 class="text-sm font-bold uppercase tracking-wider mb-4 pb-2 border-b border-neutral-200">Resumo do Pedido</h2>
+                <div class="flex justify-between text-sm mb-2">
+                    <span class="text-neutral-600">Subtotal</span>
+                    <span id="resumo-subtotal" class="font-bold">R$ 0,00</span>
+                </div>
+                <div class="flex justify-between text-sm mb-4">
+                    <span class="text-neutral-600">Frete</span>
+                    <span class="font-bold text-green-600">Grátis</span>
+                </div>
+                <div class="flex justify-between text-base font-bold mb-6 pt-4 border-t border-neutral-200">
+                    <span>Total</span>
+                    <span id="resumo-total">R$ 0,00</span>
+                </div>
+
+                <button onclick="finalizarPedidoReal()" class="bg-neutral-900 text-white w-full py-4 text-xs font-bold tracking-widest uppercase hover:bg-neutral-800 transition duration-300">
+                    FINALIZAR PEDIDO
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Script de Gerenciamento do Carrinho via LocalStorage -->
+    <script>
+        function carregarCarrinhoPagina() {
+            let carrinho = JSON.parse(localStorage.getItem('carrinho_reservo')) || [];
+            const container = document.getElementById('lista-carrinho-pagina');
+            const subtotalEl = document.getElementById('resumo-subtotal');
+            const totalEl = document.getElementById('resumo-total');
+
+            if (carrinho.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12">
+                        <p class="text-neutral-500 text-sm mb-4">Sua sacola está vazia.</p>
+                        <a href="{% url 'home' %}" class="inline-block bg-neutral-900 text-white px-6 py-3 text-xs font-bold uppercase tracking-widest">Ir para a Loja</a>
+                    </div>
+                `;
+                subtotalEl.innerText = "R$ 0,00";
+                totalEl.innerText = "R$ 0,00";
+                return;
+            }
+
+            let html = '';
+            let subtotal = 0;
+
+            carrinho.forEach((item, index) => {
+                subtotal += item.preco;
+                html += `
+                    <div class="flex items-center gap-4 pb-6 border-b border-neutral-200">
+                        <img src="${item.img}" class="w-20 h-24 object-cover bg-neutral-100">
+                        <div class="flex-1">
+                            <h3 class="text-sm font-bold">${item.nome}</h3>
+                            <p class="text-xs text-neutral-500">Tamanho: ${item.tamanho}</p>
+                            <p class="text-sm font-bold mt-2">R$ ${item.preco.toFixed(2).replace('.', ',')}</p>
+                        </div>
+                        <button onclick="removerItem(${index})" class="text-neutral-400 hover:text-red-600 text-sm p-2"><i class="fa-solid fa-trash-can"></i></button>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+            subtotalEl.innerText = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+            totalEl.innerText = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+        }
+
+        function removerItem(index) {
+            let carrinho = JSON.parse(localStorage.getItem('carrinho_reservo')) || [];
+            carrinho.splice(index, 1);
+            localStorage.setItem('carrinho_reservo', JSON.stringify(carrinho));
+            carregarCarrinhoPagina();
+        }
+
+        function finalizarPedidoReal() {
+            let carrinho = JSON.parse(localStorage.getItem('carrinho_reservo')) || [];
+            if(carrinho.length === 0) {
+                alert('Sua sacola está vazia!');
+                return;
+            }
+            alert('Pedido finalizado com sucesso! Obrigado por comprar na Reservo.');
+            localStorage.removeItem('carrinho_reservo');
+            window.location.href = "{% url 'home' %}";
+        }
+
+        carregarCarrinhoPagina();
+    </script>
+</body>
+</html>
